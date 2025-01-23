@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "barnacle-boilerplate"
+version = "0.1.0"
+description = "Quickstart notebooks and scripts for using Barnacle to analyze your data."
+authors = ["Stephen Blaskowski <stephen.blaskowski@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+jupyter = "^1.1.1"
+tensorly-lab = {git = "https://github.com/tensorly/lab.git"}
+h5py = "^3.12.1"
+netcdf4 = "^1.7.2"
+barnacle = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
