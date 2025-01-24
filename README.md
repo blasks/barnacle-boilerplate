@@ -1,18 +1,18 @@
 # barnacle-boilerplate
 Quickstart notebooks and scripts for using Barnacle to analyze your data
 
-## Step 1: Set up your work environment
-1. Copy the contents of this repository to a directory on your system. This could be accomplished by cloning the repository locally, or downloading all the files to a local working directory.
-1. Set up your virtual environment
+## Step 1: Set up your environment
+1. Copy the contents of this repository to a working directory on your system. This could be accomplished by cloning the repository locally, or downloading all the files to a local directory.
+1. Install [Barnacle](https://github.com/blasks/barnacle) and other project tools
     1. If it's not already installed, install [Poetry](https://python-poetry.org/) on your local system. Poetry is a dependency management tool for Python packages. You can find [installation instructions](https://python-poetry.org/docs/#installation) on the Poetry website.
     1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the `pyproject.toml` file.
 
 ## Step 2: Assemble your data
-1. Normalize your data. This step will affect the interpretation of the Barnacle components that result from your analysis. The choice of normalization method is highly dependent on A) your data type and B) the types of trends or patterns you're interested in looking for.
-    1. In [our analysis of marine metatranscriptomes](https://doi.org/10.1101/2024.07.15.603627), we used the [sctransform](https://satijalab.org/seurat/articles/sctransform_vignette) package to normalize transcript counts, because this allowed us to account for nuisance variables like changes in organism abundance and batch effects, and it also accounted for zero-values and overdispersion in the transcript abundance distributions (variance increases with increasing mean abundance) -- properties [typical of metatranscriptomic data](https://doi.org/10.1186/s13059-017-1359-z).
 1. Create a csv of your data in [tidy format](https://tidyr.tidyverse.org/articles/tidy-data.html)
-    1. Each dimension of your tensor should have it's own column, in addition to a column designating sample replicate and another for your normalized data itself.
-    1. For example, your metatranscriptomic data might have these column names: `'gene', 'taxon', 'sample', 'replicate', 'transcript_count'`
+    1. Each dimension of your tensor should have it's own column, in addition to a column designating sample replicate and another for your data itself. For example, your metatranscriptomic data might have these column names: `'gene', 'taxon', 'sample', 'replicate', 'transcript_count'`
+1. Normalize your data. This step will affect the interpretation of the Barnacle components that result from your analysis. The choice of normalization method is highly dependent on A) your data type and B) the types of patterns you're interested in trying to find in your data (e.g. changes in organism abundance vs. changes in transcriptional regulation in metatranscriptomics data).
+    1. In [our analysis of marine metatranscriptomes](https://doi.org/10.1101/2024.07.15.603627), we used the [sctransform](https://satijalab.org/seurat/articles/sctransform_vignette) package to normalize transcript counts, because this allowed us to remove the effect of variables we weren't interested in analyzing, like differences in organism abundance and sequencing depth. Sctransform also provides an elegant way of handling zero-values and overdispersion in the transcript abundance distributions (variance increases with increasing mean abundance) -- properties [typical of metatranscriptomic data](https://doi.org/10.1186/s13059-017-1359-z).
+    1. If you would like to use sctransform to normalize your data, you can run the `2-normalize-sctransform.ipynb` notebook. Note that you will first need to [install R](https://cran.r-project.org/) and [install sctransform](https://github.com/satijalab/sctransform) on your system in order to run this notebook.
 
 ## Step 3: Build your data tensor
 1. Run the `3-tensorize-data.ipynb` notebook to arrange your normalized data into tensor format, using the Python package [xarray](https://docs.xarray.dev/en/stable/).
@@ -27,4 +27,4 @@ Quickstart notebooks and scripts for using Barnacle to analyze your data
 
 ## Step 5: Analyze the results
 1. Run the `5-analyze-results.ipynb` notebook to explore your final model.
-    1. The most useful analysis and visualization of your results depends on the type of data you're analyzing, as well as the size and shape of your data tensor. Because of this, the examples may have to be modified for your use case. This notebook is designed to give you a few ideas of where to start your exploration, and inspire your creativity about where to go from here!
+    1. The most useful analysis and visualization of your results depends on the type of data you're analyzing, as well as the size and shape of your data tensor. Because of this, the examples may have to be modified for your use case. This notebook is designed to give you a few ideas of where to start your exploration, and inspire your creativity about where to go from here with your analysis!
