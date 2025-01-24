@@ -5,7 +5,7 @@ Quickstart notebooks and scripts for using Barnacle to analyze your data
 1. Copy the contents of this repository to a working directory on your system. This could be accomplished by cloning the repository locally, or downloading all the files to a local directory.
 1. Install [Barnacle](https://github.com/blasks/barnacle) and other project tools
     1. If it's not already installed, install [Poetry](https://python-poetry.org/) on your local system. Poetry is a dependency management tool for Python packages. You can find [installation instructions](https://python-poetry.org/docs/#installation) on the Poetry website.
-    1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the `pyproject.toml` file.
+    1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the [`pyproject.toml`](https://github.com/blasks/barnacle-boilerplate/blob/main/pyproject.toml) file.
 
 ## Step 2: Assemble your data
 1. Create a csv of your data in [tidy format](https://tidyr.tidyverse.org/articles/tidy-data.html)
