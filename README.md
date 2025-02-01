@@ -4,8 +4,41 @@ Quickstart notebooks and scripts for using Barnacle to analyze your data
 ## Step 1: Set up your environment
 1. Copy the contents of this repository to a working directory on your system. This could be accomplished by cloning the repository locally, or downloading all the files to a local directory.
 1. Install [Barnacle](https://github.com/blasks/barnacle) and other project tools
+
+    #### Install to filesystem
+
     1. If it's not already installed, install [Poetry](https://python-poetry.org/) on your local system. Poetry is a dependency management tool for Python packages. You can find [installation instructions](https://python-poetry.org/docs/#installation) on the Poetry website.
     1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the [`pyproject.toml`](https://github.com/blasks/barnacle-boilerplate/blob/main/pyproject.toml) file.
+
+    #### Or use a container
+
+    1. If it's not already installed, install [docker](https://www.docker.com/get-started/). 
+    
+    1. Navigate to the repository directory and run
+    
+        ```docker build -t barnacle .```
+
+    1. Start a bash shell in the cointainer using `docker run barnacle`
+    
+    1. If you need to make the container portable (e.g. for use on a remote server that uses [singularity/apptainer](https://apptainer.org/docs/user/main/introduction.html)) 
+    
+        - You can create a [dockerhub](https://app.docker.com/) account and then [push the image](https://docs.docker.com/docker-hub/quickstart/) with tag: `<dockerhub account>/barnacle`
+
+            Then you can build the singularity image using: 
+
+            ```singularity build barnacle.sif docker://<dockerhub account>/barnacle```
+
+        - Alternatively you can save the container to a tarball
+
+            ```docker save barnacle | gzip > barnacle.tar.gz```
+
+            and then transfer the file. You can build the the apptainer image using
+
+            ```apptainer build barnacle.sif docker-archive://barnacle.tar.gz``` 
+    
+    1. Start a bash shell in the container using `apptainer run barnacle.sif`
+
+
 
 ## Step 2: Assemble your data
 1. Create a csv of your data in [tidy format](https://tidyr.tidyverse.org/articles/tidy-data.html)
