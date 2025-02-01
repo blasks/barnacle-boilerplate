@@ -15,6 +15,7 @@ h5py = "^3.12.1"
 netcdf4 = "^1.7.2"
 barnacle = "^0.1.0"
 rpy2 = "<3.5.17"
+toml = "^0.10.2"
 
 
 [build-system]
