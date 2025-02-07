@@ -336,7 +336,7 @@ def main():
         cv_df = pd.DataFrame(
             columns=['bootstrap_id', 'rank', 'lambda', 'modeled_replicate', 
                      'comparison_replicate', 'n_components', 
-                     'mean_pct_nonzero_mode0', 'sse_cv', 'fms_cv']
+                     'mode0_factor_sparsity', 'sse', 'fms']
         )
         cv_results = []
     
@@ -405,7 +405,7 @@ def main():
         else:
             print('Separating shuffled replicate DataArrays', flush=True)
             replicate_sets = separate_replicates(
-                shuffle_ds, list(shuffle_ds.data.coords), 'data'
+                shuffle_ds, list(shuffle_ds.coords)[:-1] + ['sample_id'], 'data'
             )
             for rep in replicates:
                 # save shuffled replicate data
@@ -550,7 +550,7 @@ def main():
                         common_labels, idx_modeled, idx_comparison = select_common_indices(
                             rep_data[modeled_rep], 
                             rep_data[comparison_rep], 
-                            ['sample_replicate_id']
+                            ['sample_id']
                         )
                         # get cp subsets
                         subset_cps[modeled_rep] = subset_cp_tensor(
@@ -563,14 +563,14 @@ def main():
                         )
                         # get comparison data
                         comparison_data = rep_data[comparison_rep].sel(
-                            sample_replicate_id=common_labels
-                        )
+                            sample_id=common_labels
+                        )                        
                     else:
                         # cp subset is full model
                         subset_cps[modeled_rep] = cps[modeled_rep]
                         # comparison data is full replicate set
                         comparison_data = rep_data[comparison_rep]
-
+                    
                     # calculate fms & cosine similiary scores against other fit models
                     if modeled_rep < comparison_rep:
                         fms_cv = factor_match_score(
@@ -593,10 +593,10 @@ def main():
                             'modeled_replicate': modeled_rep, 
                             'comparison_replicate': comparison_rep, 
                             'n_components': nonzero_components(cps[modeled_rep]), 
-                            'mean_pct_nonzero_mode0': 
-                                (cps[modeled_rep].factors[0] != 0.0).mean(axis=0).mean(), 
-                            'sse_cv': rel_sse, 
-                            'fms_cv': fms_cv, 
+                            'mode0_factor_sparsity': 
+                                1 - (cps[modeled_rep].factors[0] != 0.0).mean(axis=0).mean(), 
+                            'sse': rel_sse, 
+                            'fms': fms_cv, 
                         }
                     )
         # store results in dataframe and save
