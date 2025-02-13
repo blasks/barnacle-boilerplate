@@ -15,7 +15,8 @@ h5py = "^3.12.1"
 netcdf4 = "^1.7.2"
 barnacle = {git = "https://github.com/blasks/barnacle.git", rev = "612b6a4"}
 rpy2 = "<3.5.17"
-toml = "^0.10.2"
+tomli = ">=2.2.1"
+tomli-w = ">=1.2.0"
 tqdm = "^4.67.1"
 
 

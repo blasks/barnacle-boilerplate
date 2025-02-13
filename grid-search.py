@@ -13,7 +13,7 @@ import datetime
 import json
 import numpy as np
 import pandas as pd
-import toml
+import tomli
 import xarray as xr
 
 from barnacle import SparseCP
@@ -290,7 +290,8 @@ def main():
     # load config toml file
     parser = handle_arguments()
     args = parser.parse_args()
-    config = toml.load(args.toml)
+    with open(args.toml, 'rb') as f:
+        config = tomli.load(f)
     
     # set random state
     seed = config['script']['seed']
