@@ -92,6 +92,8 @@ def generate_replicate_labels(sample_names, random_state=None, replicate_map=Non
         raise AssertionError('`sample_names` must be a numpy.ndarray')
     # check sample_names are sorted
     if not np.all(sample_names[:-1] <= sample_names[1:]):
+        # idx = np.argwhere(sample_names[:-1] > sample_names[1:])[0][0]
+        # a = sample_names[idx-2:idx+4]
         raise AssertionError('`sample_names` must be sorted in ascending order')
     # get counts of each sample name
     names, counts = np.unique(sample_names, return_counts=True)
