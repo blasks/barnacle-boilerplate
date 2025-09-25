@@ -3,11 +3,15 @@ Quickstart notebooks and scripts for using Barnacle to analyze your data
 
 ## Step 1: Set up your environment
 1. Copy the contents of this repository to a working directory on your system. This could be accomplished by cloning the repository locally, or downloading all the files to a local directory.
-1. Install [Barnacle](https://github.com/blasks/barnacle) and other project tools
-    1. Install [Poetry](https://python-poetry.org/) on your system. Poetry is a dependency management tool for Python packages. You can find [installation instructions](https://python-poetry.org/docs/#installation) on the Poetry website.
-        - Make sure you install Poetry as directed on the website (do not use `pip`; you can use `pipx` instead).
-        - If Poetry is already installed on your system, make sure it is up to date by running `pipx upgrade poetry`. 
-    1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the [`pyproject.toml`](https://github.com/blasks/barnacle-boilerplate/blob/main/pyproject.toml) file.
+1. Install dependencies
+    1. **Option A:** Use a container
+        1. If using docker, run `docker pull blasks/barnacle-bp`
+        1. If using apptainer, run `apptainer build barnacle-bp.sif docker://blasks/barnacle-bp`
+    1. **Option B:** Set up your own local environment with [Barnacle](https://github.com/blasks/barnacle) and other project tools
+        1. Install [Poetry](https://python-poetry.org/) on your system. Poetry is a dependency management tool for Python packages. You can find [installation instructions](https://python-poetry.org/docs/#installation) on the Poetry website.
+            - Make sure you install Poetry as directed on the website (do not use `pip`; you can use `pipx` instead).
+            - If Poetry is already installed on your system, make sure it is up to date by running `pipx upgrade poetry`. 
+        1. Navigate to your working directory and run `poetry install` to install your virtual environment based on the formula in the [`pyproject.toml`](https://github.com/blasks/barnacle-boilerplate/blob/main/pyproject.toml) file.
 
 ## Step 2: Assemble your data
 1. Create a csv of your data in [tidy format](https://tidyr.tidyverse.org/articles/tidy-data.html)
